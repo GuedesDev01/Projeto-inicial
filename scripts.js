@@ -13,15 +13,20 @@ var cidade = document.getElementById("cidade");
 var estado = document.getElementById("estado");
  
 function alertar(event){
-    //alert("Você clicou no botão!!!!" + event);
+    alert("Você clicou no botão!!!!" + event);
  
     const url = `http://viacep.com.br/ws/${cep.value}/json`;
     fetch(url)
-    .then(resposta=>resposta.json())
-    .then(dados=>alert(dados.bairro))
-  
-}
-
+    .then(function (respostas){
+          return respostas.json()
+          })
+          .then(function (dados){
+            logradouro.value = dados.logradouro;
+            bairro.value = dados.bairro;
+            cidade.value = dados.localidade;
+            estado.value = dados.uf;
+          })
+        }
 function saidaDeDados (){
  
     saida.innerText = "Nome: " + nome.value +
